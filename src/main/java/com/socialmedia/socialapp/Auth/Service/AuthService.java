@@ -5,9 +5,9 @@ import com.socialmedia.socialapp.Auth.DTO.AuthResponse;
 import com.socialmedia.socialapp.Auth.DTO.LoginRequest;
 import com.socialmedia.socialapp.Auth.DTO.RegisterRequest;
 import com.socialmedia.socialapp.Jwt.JwtService;
-import com.socialmedia.socialapp.User.Role;
-import com.socialmedia.socialapp.User.User;
-import com.socialmedia.socialapp.User.UserRepository;
+import com.socialmedia.socialapp.User.DTO.Role;
+import com.socialmedia.socialapp.User.Entity.User;
+import com.socialmedia.socialapp.User.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -64,8 +64,8 @@ public class AuthService {
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        user.setfirstname(request.getfirstname());
-        user.setlastname(request.getlastname());
+        user.setFirst_name(request.getfirstname());
+        user.setLast_name(request.getlastname());
         user.setRole(Role.USER);
 
         userRepository.save(user);
