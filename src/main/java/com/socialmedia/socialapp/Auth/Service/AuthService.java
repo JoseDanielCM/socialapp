@@ -61,11 +61,12 @@ public class AuthService {
     public AuthResponse register(RegisterRequest request) {
         System.out.println(request);
         User user = new User();
+
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-
-        user.setFirst_name(request.getfirstname());
-        user.setLast_name(request.getlastname());
+        user.setEmail(request.getEmail());
+        user.setFirst_name(request.getFirst_name());
+        user.setLast_name(request.getLast_name());
         user.setRole(Role.USER);
 
         userRepository.save(user);

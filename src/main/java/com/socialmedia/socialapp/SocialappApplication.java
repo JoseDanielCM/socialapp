@@ -7,5 +7,4 @@ public class SocialappApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SocialappApplication.class, args);
 	}
-
 }

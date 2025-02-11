@@ -1,5 +1,8 @@
 package com.socialmedia.socialapp.User.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.socialmedia.socialapp.Follow.Entity.Follow;
+import com.socialmedia.socialapp.Post.Entity.Post;
 import com.socialmedia.socialapp.User.DTO.Role;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,12 +36,20 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     Role role;
 
-    @OneToMany(mappedBy = "user_id")
+// RELACIONES
+
+// FOLLOW
+    @OneToMany(mappedBy = "user_follow") // Follow -> user_data
+    @JsonManagedReference("user_follow-follows")
     private List<Follow> follows;  // Usuarios que este usuario sigue
 
     @OneToMany(mappedBy = "followed_user")
+    @JsonManagedReference("user_data-followers")
     private List<Follow> followers; // Usuarios que siguen a este usuario
-
+// Post
+    @OneToMany(mappedBy = "user_post") //
+    @JsonManagedReference("user_data-posts")
+    private List<Post> posts;
 
     // -----------------------
 
