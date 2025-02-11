@@ -1,8 +1,10 @@
 package com.socialmedia.socialapp.DbEntity.Follow;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.socialmedia.socialapp.DbEntity.User.User;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +18,7 @@ public class Follow {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference("user_follow-follows")
+    @JsonManagedReference("user_follow-follows")
     private User user_follow;
 
     @ManyToOne
@@ -24,6 +26,7 @@ public class Follow {
     @JsonBackReference("user_follow-followers")
     private User followed_user;
 
+    @CreationTimestamp
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime registered_at;
 

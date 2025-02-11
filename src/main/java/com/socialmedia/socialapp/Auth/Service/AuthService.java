@@ -67,8 +67,9 @@ public class AuthService {
         user.setEmail(request.getEmail());
         user.setFirst_name(request.getFirst_name());
         user.setLast_name(request.getLast_name());
+        user.setBirthdate(request.getBirthdate());
         user.setRole(Role.USER);
-
+        System.out.println(user);
         userRepository.save(user);
 
         AuthResponse authResponse = new AuthResponse();

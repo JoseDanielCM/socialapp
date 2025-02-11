@@ -1,14 +1,19 @@
 package com.socialmedia.socialapp.DbEntity.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.socialmedia.socialapp.DbEntity.Comment.Comment;
+import com.socialmedia.socialapp.DbEntity.Like.Like;
 import com.socialmedia.socialapp.DbEntity.Notifications.Notification;
 import com.socialmedia.socialapp.DbEntity.Post.Post;
 import com.socialmedia.socialapp.DbEntity.User.DTO.Role;
 import com.socialmedia.socialapp.DbEntity.Follow.Follow;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -29,8 +34,12 @@ public class User implements UserDetails {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false)
+    private LocalDate birthdate;
+    private Long phone;
     private String bio;
     private String profile_picture;
+    @CreationTimestamp
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime registered_at;
     @Enumerated(EnumType.STRING)
@@ -40,11 +49,11 @@ public class User implements UserDetails {
 
 // FOLLOW
     @OneToMany(mappedBy = "user_follow") // Follow -> user_data
-    @JsonManagedReference("user_follow-follows")
+    @JsonIgnore
     private List<Follow> follows;  // Users that this user is following
 
     @OneToMany(mappedBy = "followed_user")
-    @JsonManagedReference("followed_user-followers")
+    @JsonIgnore
     private List<Follow> followers; // Users that follow this user
 // Post
     @OneToMany(mappedBy = "user_post") //
@@ -58,27 +67,35 @@ public class User implements UserDetails {
 // Like
     @OneToMany(mappedBy = "user_like")
     @JsonManagedReference("user_like-likes")
-    private List<Notification> likes;
+    private List<Like> likes;
 // Comment
     @OneToMany(mappedBy = "commented_by_user")
     @JsonManagedReference("commented_by_user-comments")
-    private List<Notification> comments;
+    private List<Comment> comments;
     // -----------------------
 
     public User() {
     }
 
-    public User(Long id, String first_name, String last_name, String username, String password, String email, String bio, String profile_picture, LocalDateTime registered_at, Role role) {
+    public User(Long id, String first_name, String last_name, String username, String password, String email, LocalDate date, Long phone, String bio, String profile_picture, LocalDateTime registered_at, Role role, List<Follow> follows, List<Follow> followers, List<Post> posts, List<Notification> notifications, List<Like> likes, List<Comment> comments) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.birthdate = date;
+        this.phone = phone;
         this.bio = bio;
         this.profile_picture = profile_picture;
         this.registered_at = registered_at;
         this.role = role;
+        this.follows = follows;
+        this.followers = followers;
+        this.posts = posts;
+        this.notifications = notifications;
+        this.likes = likes;
+        this.comments = comments;
     }
 
     @Override
@@ -205,15 +222,75 @@ public class User implements UserDetails {
         this.followers = followers;
     }
 
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public LocalDate getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public Long getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Long phone) {
+        this.phone = phone;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", birthdate=" + birthdate +
+                ", phone=" + phone +
+                ", bio='" + bio + '\'' +
+                ", profile_picture='" + profile_picture + '\'' +
+                ", registered_at=" + registered_at +
                 ", role=" + role +
+                ", follows=" + follows +
+                ", followers=" + followers +
+                ", posts=" + posts +
+                ", notifications=" + notifications +
+                ", likes=" + likes +
+                ", comments=" + comments +
                 '}';
     }
 }

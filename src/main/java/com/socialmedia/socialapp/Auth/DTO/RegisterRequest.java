@@ -1,6 +1,8 @@
 package com.socialmedia.socialapp.Auth.DTO;
 
 
+import java.time.LocalDate;
+
 public class RegisterRequest {
     String username;
     String password;
@@ -8,15 +10,18 @@ public class RegisterRequest {
     String first_name;
     String last_name;
 
+    LocalDate birthdate;
+
     public RegisterRequest() {
     }
 
-    public RegisterRequest(String username, String password, String email, String first_name, String last_name) {
+    public RegisterRequest(String username, String password, String email, String first_name, String last_name, LocalDate birthdate) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.first_name = first_name;
         this.last_name = last_name;
+        this.birthdate = birthdate;
     }
 
     public String getUsername() {
@@ -57,5 +62,13 @@ public class RegisterRequest {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
+    }
+
+    public LocalDate getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
     }
 }

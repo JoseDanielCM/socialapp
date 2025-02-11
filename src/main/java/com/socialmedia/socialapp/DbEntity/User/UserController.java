@@ -27,10 +27,7 @@ public class UserController {
         return userService.getUser(id);
     }
 
-    @GetMapping("/getFollowers/{id}")
-    public ResponseEntity<List<Follow>> getFollowers(@PathVariable Long id){
-        return userService.getFollowers(id);
-    }
+
 
 // UPDATE
 // DELETE
