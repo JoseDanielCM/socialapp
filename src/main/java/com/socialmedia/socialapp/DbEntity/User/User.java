@@ -1,9 +1,9 @@
-package com.socialmedia.socialapp.User.Entity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.socialmedia.socialapp.DbEntity.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.socialmedia.socialapp.Follow.Entity.Follow;
-import com.socialmedia.socialapp.Post.Entity.Post;
-import com.socialmedia.socialapp.User.DTO.Role;
+import com.socialmedia.socialapp.DbEntity.Notifications.Notification;
+import com.socialmedia.socialapp.DbEntity.Post.Post;
+import com.socialmedia.socialapp.DbEntity.User.DTO.Role;
+import com.socialmedia.socialapp.DbEntity.Follow.Follow;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -41,16 +41,28 @@ public class User implements UserDetails {
 // FOLLOW
     @OneToMany(mappedBy = "user_follow") // Follow -> user_data
     @JsonManagedReference("user_follow-follows")
-    private List<Follow> follows;  // Usuarios que este usuario sigue
+    private List<Follow> follows;  // Users that this user is following
 
     @OneToMany(mappedBy = "followed_user")
-    @JsonManagedReference("user_data-followers")
-    private List<Follow> followers; // Usuarios que siguen a este usuario
+    @JsonManagedReference("followed_user-followers")
+    private List<Follow> followers; // Users that follow this user
 // Post
     @OneToMany(mappedBy = "user_post") //
-    @JsonManagedReference("user_data-posts")
-    private List<Post> posts;
+    @JsonManagedReference("user_post-posts")
+    private List<Post> posts; // posts of the user
+// Notification
+    @OneToMany(mappedBy = "user_notification")
+    @JsonManagedReference("user_notification-notifications")
+    private List<Notification> notifications; // notifications of the user
 
+// Like
+    @OneToMany(mappedBy = "user_like")
+    @JsonManagedReference("user_like-likes")
+    private List<Notification> likes;
+// Comment
+    @OneToMany(mappedBy = "commented_by_user")
+    @JsonManagedReference("commented_by_user-comments")
+    private List<Notification> comments;
     // -----------------------
 
     public User() {

@@ -1,7 +1,7 @@
-package com.socialmedia.socialapp.Follow.Entity;
+package com.socialmedia.socialapp.DbEntity.Follow;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.socialmedia.socialapp.User.Entity.User;
+import com.socialmedia.socialapp.DbEntity.User.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

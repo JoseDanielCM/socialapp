@@ -1,4 +1,4 @@
-package com.socialmedia.socialapp.Follow.Service;
+package com.socialmedia.socialapp.DbEntity.Follow;
 
 import org.springframework.stereotype.Service;
 

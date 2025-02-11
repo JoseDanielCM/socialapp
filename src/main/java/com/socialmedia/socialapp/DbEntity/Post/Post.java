@@ -1,10 +1,14 @@
-package com.socialmedia.socialapp.Post.Entity;
+package com.socialmedia.socialapp.DbEntity.Post;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.socialmedia.socialapp.User.Entity.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.socialmedia.socialapp.DbEntity.Comment.Comment;
+import com.socialmedia.socialapp.DbEntity.Like.Like;
+import com.socialmedia.socialapp.DbEntity.User.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -24,6 +28,17 @@ public class Post {
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
+// RELACIONES
+
+    // LIKE
+    @OneToMany(mappedBy = "post_like") // Follow -> user_data
+    @JsonManagedReference("post_like-likes")
+    private List<Like> likes;  // Users that this user is following
+
+    // COMMENT
+    @OneToMany(mappedBy = "commented_post") // Follow -> user_data
+    @JsonManagedReference("commented_post-comments")
+    private List<Comment> comments;  // Users that this user is following
     public Post() {
     }
 

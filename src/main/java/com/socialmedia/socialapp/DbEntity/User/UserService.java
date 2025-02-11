@@ -1,8 +1,6 @@
-package com.socialmedia.socialapp.User.Service;
+package com.socialmedia.socialapp.DbEntity.User;
 
-import com.socialmedia.socialapp.Follow.Entity.Follow;
-import com.socialmedia.socialapp.User.Entity.User;
-import com.socialmedia.socialapp.User.Repository.UserRepository;
+import com.socialmedia.socialapp.DbEntity.Follow.Follow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

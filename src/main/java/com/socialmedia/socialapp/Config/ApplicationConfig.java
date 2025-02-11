@@ -1,6 +1,6 @@
 package com.socialmedia.socialapp.Config;
 
-import com.socialmedia.socialapp.User.Repository.UserRepository;
+import com.socialmedia.socialapp.DbEntity.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
