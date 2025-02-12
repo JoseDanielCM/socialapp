@@ -19,13 +19,11 @@ public class UserService {
         return userRepository.findById(id)
                .map(user -> ResponseEntity.ok().body(user))
                .orElse(ResponseEntity.notFound().build());
+    }
 
-
-        /*
-        implement the exceptions
-        User user = userRepository.findById(id)
-               .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-                return ResponseEntity.ok(user);
-         */
+    public ResponseEntity<User> getUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+               .map(user -> ResponseEntity.ok().body(user))
+               .orElse(ResponseEntity.notFound().build());
     }
 }
