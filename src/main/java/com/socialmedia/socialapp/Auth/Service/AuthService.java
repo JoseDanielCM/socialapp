@@ -4,6 +4,8 @@ package com.socialmedia.socialapp.Auth.Service;
 import com.socialmedia.socialapp.Auth.DTO.AuthResponse;
 import com.socialmedia.socialapp.Auth.DTO.LoginRequest;
 import com.socialmedia.socialapp.Auth.DTO.RegisterRequest;
+import com.socialmedia.socialapp.Exceptions.UsersExceptions.UserAlreadyExists;
+import com.socialmedia.socialapp.Exceptions.UsersExceptions.UserNotFoundException;
 import com.socialmedia.socialapp.Jwt.JwtService;
 import com.socialmedia.socialapp.DbEntity.User.DTO.Role;
 import com.socialmedia.socialapp.DbEntity.User.User;
@@ -34,10 +36,8 @@ public class AuthService {
     public AuthResponse login(LoginRequest request) {
         // Obtener el usuario desde la base de datos
         User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
-        System.out.println(user);
-        System.out.println(request);
 
         // Comparar la contraseña ingresada con la almacenada en la BD
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
@@ -60,6 +60,15 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest request) {
         System.out.println(request);
+
+        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
+            throw new UserAlreadyExists("User with this username already exists");
+        }
+
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new UserAlreadyExists("User with this email already exists");
+        }
+
         User user = new User();
 
         user.setUsername(request.getUsername());
