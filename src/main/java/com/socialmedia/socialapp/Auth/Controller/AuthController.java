@@ -50,7 +50,22 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
-        return ResponseEntity.ok(authService.register(request));
+        System.out.println("holaaaaaaaaaaaaaaaaaa");
+        AuthResponse authResponse = authService.register(request); // Obtiene el token
+        String token = authResponse.getToken(); // Asume que hay un `getToken()`
+        System.out.println(token);
+        ResponseCookie cookie = ResponseCookie.from("token", token)
+                .httpOnly(true)  // Evita acceso desde JavaScript
+                .secure(false)   // TRUE si usas HTTPS
+                .sameSite("Lax") // Protección CSRF básica
+                .path("/")        // Disponible en toda la app
+                .maxAge(24 * 60 * 60) // Expira en 1 día
+                .build();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body(authResponse);
+
     }
 
     @PostMapping("/validate")

@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(authRequest ->{
                     authRequest.requestMatchers("/auth/**").permitAll();
-                    authRequest.requestMatchers("/api/v1/**").authenticated(); // Requiere autenticación
+                    authRequest.requestMatchers("/api/user/**").authenticated(); // Requiere autenticación
                     authRequest.anyRequest().authenticated();
                 })
                 .sessionManagement(sessionManager ->
