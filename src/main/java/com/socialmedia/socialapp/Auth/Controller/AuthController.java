@@ -6,7 +6,9 @@ import com.socialmedia.socialapp.Auth.DTO.LoginRequest;
 import com.socialmedia.socialapp.Auth.DTO.RegisterRequest;
 import com.socialmedia.socialapp.Jwt.JwtService;
 import com.socialmedia.socialapp.Jwt.TokenUtil;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -65,6 +67,21 @@ public class AuthController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token inválido");
         }
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("token", "");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false); // Asegúrate de que sea Secure si usas HTTPS
+        cookie.setPath("/"); // Apunta a toda la aplicación
+        cookie.setMaxAge(0); // Esto elimina la cookie
+
+        // Agregar la cookie a la respuesta
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok("Logged out successfully");
+
     }
 
 }
