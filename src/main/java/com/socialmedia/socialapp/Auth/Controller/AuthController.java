@@ -29,13 +29,13 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+
         AuthResponse authResponse = authService.login(request); // Obtiene el token
         String token = authResponse.getToken(); // Asume que hay un `getToken()`
 
         ResponseCookie cookie = ResponseCookie.from("token", token)
-                .httpOnly(true)  // Evita acceso desde JavaScript
+                .httpOnly(false)  // Evita acceso desde JavaScript
                 .secure(false)   // TRUE si usas HTTPS
-                .sameSite("Lax") // Protección CSRF básica
                 .path("/")        // Disponible en toda la app
                 .maxAge(24 * 60 * 60) // Expira en 1 día
                 .build();
@@ -50,14 +50,12 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
-        System.out.println("holaaaaaaaaaaaaaaaaaa");
         AuthResponse authResponse = authService.register(request); // Obtiene el token
         String token = authResponse.getToken(); // Asume que hay un `getToken()`
         System.out.println(token);
         ResponseCookie cookie = ResponseCookie.from("token", token)
-                .httpOnly(true)  // Evita acceso desde JavaScript
+                .httpOnly(false)  // Evita acceso desde JavaScript
                 .secure(false)   // TRUE si usas HTTPS
-                .sameSite("Lax") // Protección CSRF básica
                 .path("/")        // Disponible en toda la app
                 .maxAge(24 * 60 * 60) // Expira en 1 día
                 .build();
@@ -86,17 +84,19 @@ public class AuthController {
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout(HttpServletResponse response) {
+        // Crear la cookie con el mismo nombre que la original
         Cookie cookie = new Cookie("token", "");
-        cookie.setHttpOnly(true);
-        cookie.setSecure(false); // Asegúrate de que sea Secure si usas HTTPS
-        cookie.setPath("/"); // Apunta a toda la aplicación
-        cookie.setMaxAge(0); // Esto elimina la cookie
+        cookie.setHttpOnly(false); // No accesible desde JavaScript
+        cookie.setSecure(false);   // Asegúrate de que sea true si usas HTTPS
+        cookie.setPath("/");      // Apunta a toda la aplicación
+        cookie.setMaxAge(0);      // Elimina la cookie
 
-        // Agregar la cookie a la respuesta
+
+        // Agregar la cookie anulada a la respuesta
         response.addCookie(cookie);
 
         return ResponseEntity.ok("Logged out successfully");
-
     }
+
 
 }
