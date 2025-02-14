@@ -36,7 +36,7 @@ public class User implements UserDetails {
     private String email;
     @Column(nullable = false)
     private LocalDate birthdate;
-    private Long phone;
+    private String phone;
     private String bio;
     private String profile_picture;
     @CreationTimestamp
@@ -77,14 +77,14 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Long id, String first_name, String last_name, String username, String password, String email, LocalDate date, Long phone, String bio, String profile_picture, LocalDateTime registered_at, Role role, List<Follow> follows, List<Follow> followers, List<Post> posts, List<Notification> notifications, List<Like> likes, List<Comment> comments) {
+    public User(Long id, String first_name, String last_name, String username, String password, String email, LocalDate birthdate, String phone, String bio, String profile_picture, LocalDateTime registered_at, Role role, List<Follow> follows, List<Follow> followers, List<Post> posts, List<Notification> notifications, List<Like> likes, List<Comment> comments) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.birthdate = date;
+        this.birthdate = birthdate;
         this.phone = phone;
         this.bio = bio;
         this.profile_picture = profile_picture;
@@ -262,11 +262,11 @@ public class User implements UserDetails {
         this.birthdate = birthdate;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

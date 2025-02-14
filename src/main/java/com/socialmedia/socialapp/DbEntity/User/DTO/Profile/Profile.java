@@ -6,12 +6,12 @@ public class Profile {
     private String lastname;
     private String bio;
     private String profilePhotoUrl;
-    private Long phoneNumber;
+    private String phoneNumber;
 
     public Profile() {
     }
 
-    public Profile(Long userId, String name, String lastname, String bio, String profilePhotoUrl, Long phoneNumber) {
+    public Profile(Long userId, String name, String lastname, String bio, String profilePhotoUrl, String phoneNumber) {
         this.userId = userId;
         this.name = name;
         this.lastname = lastname;
@@ -60,13 +60,11 @@ public class Profile {
         this.profilePhotoUrl = profilePhotoUrl;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-
 }
