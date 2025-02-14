@@ -18,9 +18,10 @@ public class ImageController {
     public boolean validateImage(@RequestParam String url) {
         try {
             System.out.println(url);
-            if (url.isEmpty() || url.isEmpty() || url.equals("")){
+            if (url == null || url.isEmpty()) {
                 return false;
             }
+            System.out.println("llegó");
             // Send a HEAD request to the image URL
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.HEAD, null, String.class);
 

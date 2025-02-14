@@ -3,6 +3,7 @@ package com.socialmedia.socialapp.DbEntity.User;
 import com.socialmedia.socialapp.DbEntity.Follow.Follow;
 import com.socialmedia.socialapp.DbEntity.Follow.FollowService;
 import com.socialmedia.socialapp.Jwt.JwtService;
+import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +27,14 @@ public class UserController {
 
     @GetMapping("/getUser/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id){
-        return userService.getUser(id);
+        System.out.println(id);
+        return ResponseEntity.ok(userService.getUser(id).getBody());
     }
 
     // get user by username
     @GetMapping("/getUser")
     public ResponseEntity<User> getUserByUsername(@RequestParam String username){
-        return userService.getUserByUsername(username);
+        return ResponseEntity.ok(userService.getUserByUsername(username).getBody());
     }
 
     @GetMapping("/me")
@@ -53,11 +55,29 @@ public class UserController {
         }
 
         String username = jwtService.getUsernameFromToken(token);
-        List<Follow> followers = userService.getFollowersByUsername(username);
+        List<User> followers = userService.getFollowersByUsername(username);
+        System.out.println(followers);
         return ResponseEntity.ok(followers);
     }
 
+    @GetMapping("/follows")
+    public ResponseEntity<?> getFollows(@CookieValue(value = "token", defaultValue = "") String token) {
+        if (token.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No token");
+        }
 
+        String username = jwtService.getUsernameFromToken(token);
+        List<User> follows = userService.getFollowsByUsername(username);
+        System.out.println(follows);
+        return ResponseEntity.ok(follows);
+    }
+
+    @GetMapping("/search")
+    public List<User> searchUsers(@RequestParam String username) {
+        System.out.println(username);
+
+        return userService.searchUsersByUsername(username);
+    }
 // UPDATE
 // DELETE
 

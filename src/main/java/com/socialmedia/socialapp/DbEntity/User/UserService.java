@@ -30,7 +30,19 @@ public class UserService {
                .orElse(ResponseEntity.notFound().build());
     }
 
-    public List<Follow> getFollowersByUsername(String username) {
+    public List<User> getFollowersByUsername(String username) {
+        System.out.println(username);
         return followRepository.findFollowersByUsername(username);
+    }
+
+    public List<User> getFollowsByUsername(String username) {
+        System.out.println(username);
+        return followRepository.findFollowsByUsername(username);
+    }
+
+    public List<User> searchUsersByUsername(String username) {
+        System.out.println(username);
+        // Aquí puedes agregar lógica adicional si es necesario
+        return userRepository.findByUsernameContainingIgnoreCase(username);  // Busca por nombre de usuario
     }
 }
