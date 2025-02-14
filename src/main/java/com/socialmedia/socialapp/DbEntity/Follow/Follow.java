@@ -18,13 +18,13 @@ public class Follow {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonManagedReference("user_follow-follows")
-    private User user_follow;
+    @JsonBackReference("user-follow")  // Ignorar la serialización de este lado
+    private User user_follow;  // Usuario que sigue a alguien
 
     @ManyToOne
     @JoinColumn(name = "followed_user_id")
-    @JsonBackReference("user_follow-followers")
-    private User followed_user;
+    @JsonBackReference("user-followers") // Ignorar la serialización de este lado
+    private User followed_user;  // Usuario seguido
 
     @CreationTimestamp
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

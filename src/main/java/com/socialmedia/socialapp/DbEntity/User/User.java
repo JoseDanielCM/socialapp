@@ -48,13 +48,13 @@ public class User implements UserDetails {
 // RELACIONES
 
 // FOLLOW
-    @OneToMany(mappedBy = "user_follow") // Follow -> user_data
-    @JsonIgnore
-    private List<Follow> follows;  // Users that this user is following
+@OneToMany(mappedBy = "user_follow") // Follow -> user_data
+@JsonManagedReference("user-follow")
+private List<Follow> follows;  // Usuarios que este usuario sigue
 
-    @OneToMany(mappedBy = "followed_user")
-    @JsonIgnore
-    private List<Follow> followers; // Users that follow this user
+    @OneToMany(mappedBy = "followed_user") // Follow -> followed_user
+    @JsonManagedReference("user-followers")
+    private List<Follow> followers; // Usuarios que siguen a este usuario
 // Post
     @OneToMany(mappedBy = "user_post") //
     @JsonManagedReference("user_post-posts")
@@ -280,13 +280,11 @@ public class User implements UserDetails {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", birthdate=" + birthdate +
-                ", phone=" + phone +
+                ", phone='" + phone + '\'' +
                 ", bio='" + bio + '\'' +
                 ", profile_picture='" + profile_picture + '\'' +
                 ", registered_at=" + registered_at +
                 ", role=" + role +
-                ", follows=" + follows +
-                ", followers=" + followers +
                 ", posts=" + posts +
                 ", notifications=" + notifications +
                 ", likes=" + likes +

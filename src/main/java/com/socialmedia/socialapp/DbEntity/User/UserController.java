@@ -1,6 +1,7 @@
 package com.socialmedia.socialapp.DbEntity.User;
 
 import com.socialmedia.socialapp.DbEntity.Follow.Follow;
+import com.socialmedia.socialapp.DbEntity.Follow.FollowService;
 import com.socialmedia.socialapp.Jwt.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,8 +43,18 @@ public class UserController {
 
         String username = jwtService.getUsernameFromToken(token);
         User user = userService.getUserByUsername(username).getBody();
-        System.out.println(user);
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/followers")
+    public ResponseEntity<?> getFollowers(@CookieValue(value = "token", defaultValue = "") String token) {
+        if (token.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No token");
+        }
+
+        String username = jwtService.getUsernameFromToken(token);
+        List<Follow> followers = userService.getFollowersByUsername(username);
+        return ResponseEntity.ok(followers);
     }
 
 
