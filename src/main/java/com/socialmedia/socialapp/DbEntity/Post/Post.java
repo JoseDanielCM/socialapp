@@ -7,6 +7,7 @@ import com.socialmedia.socialapp.DbEntity.Like.Like;
 import com.socialmedia.socialapp.DbEntity.Tag.Tag;
 import com.socialmedia.socialapp.DbEntity.User.User;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -26,8 +27,11 @@ public class Post {
     @JsonBackReference("user_post-posts")
     private User user_post;
 
+    private String title;
     private String content;
     private String img_url;
+    @CreationTimestamp
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
@@ -53,9 +57,10 @@ public class Post {
     public Post() {
     }
 
-    public Post(Long id, User user_post, String content, String img_url, LocalDateTime created_at, LocalDateTime updated_at, Set<Tag> tags, List<Like> likes, List<Comment> comments) {
+    public Post(Long id, User user_post, String title, String content, String img_url, LocalDateTime created_at, LocalDateTime updated_at, Set<Tag> tags, List<Like> likes, List<Comment> comments) {
         this.id = id;
         this.user_post = user_post;
+        this.title = title;
         this.content = content;
         this.img_url = img_url;
         this.created_at = created_at;
@@ -136,6 +141,14 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override

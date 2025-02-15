@@ -1,9 +1,6 @@
 package com.socialmedia.socialapp.DbEntity.User;
 
-import com.socialmedia.socialapp.DbEntity.Follow.Follow;
-import com.socialmedia.socialapp.DbEntity.Follow.FollowService;
 import com.socialmedia.socialapp.Jwt.JwtService;
-import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
