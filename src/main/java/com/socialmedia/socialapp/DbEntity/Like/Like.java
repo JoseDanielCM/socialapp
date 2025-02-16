@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "likes", uniqueConstraints = @UniqueConstraint(columnNames =  {"user_id","followed_user_id"}))
+@Table(name = "likes", uniqueConstraints = @UniqueConstraint(columnNames =  {"user_id","post_id"}))
 public class Like {
 
     @Id
@@ -19,23 +19,23 @@ public class Like {
     @ManyToOne
     @JoinColumn(name = "post_id")
     @JsonBackReference("post_like-likes")
-    private Post post_like;
+    private Post postlike;
 
     // Cual fue el user que dio like
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference("user_like-likes")
-    private User user_like;
+    private User userlike;
 
     private LocalDate created_at;
 
     public Like() {
     }
 
-    public Like(Long id, Post post_like, User user_like, LocalDate created_at) {
+    public Like(Long id, Post postlike, User userlike, LocalDate created_at) {
         this.id = id;
-        this.post_like = post_like;
-        this.user_like = user_like;
+        this.postlike = postlike;
+        this.userlike = userlike;
         this.created_at = created_at;
     }
 
@@ -47,20 +47,20 @@ public class Like {
         this.id = id;
     }
 
-    public Post getPost_like() {
-        return post_like;
+    public Post getPostlike() {
+        return postlike;
     }
 
-    public void setPost_like(Post post_like) {
-        this.post_like = post_like;
+    public void setPostlike(Post postlike) {
+        this.postlike = postlike;
     }
 
-    public User getUser_like() {
-        return user_like;
+    public User getUserlike() {
+        return userlike;
     }
 
-    public void setUser_like(User user_like) {
-        this.user_like = user_like;
+    public void setUserlike(User userlike) {
+        this.userlike = userlike;
     }
 
     public LocalDate getCreated_at() {
@@ -75,8 +75,8 @@ public class Like {
     public String toString() {
         return "Like{" +
                 "id=" + id +
-                ", post_like=" + post_like +
-                ", user_like=" + user_like +
+                ", postlike=" + postlike +
+                ", userlike=" + userlike +
                 ", created_at=" + created_at +
                 '}';
     }

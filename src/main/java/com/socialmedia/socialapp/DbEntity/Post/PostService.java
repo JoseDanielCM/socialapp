@@ -6,6 +6,8 @@ import com.socialmedia.socialapp.DbEntity.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostService {
 
@@ -14,7 +16,7 @@ public class PostService {
 
     @Autowired
     UserService userService;
-    public void createPost(CreatePostDTO createPostDTO) {
+    public Post createPost(CreatePostDTO createPostDTO) {
         Post post = new Post();
 
         User user = userService.getUser(createPostDTO.getUser_id()).getBody();
@@ -22,7 +24,15 @@ public class PostService {
         post.setTitle(createPostDTO.getTitle());
         post.setContent(createPostDTO.getContent());
         post.setImg_url(createPostDTO.getImg_url());
-        postRepository.save(post);
+        return postRepository.save(post);
 
+    }
+
+    public List<Post> findAll() {
+        return postRepository.findAll();
+    }
+
+    public Post findById(Long id) {
+        return postRepository.findById(id).orElse(null);
     }
 }

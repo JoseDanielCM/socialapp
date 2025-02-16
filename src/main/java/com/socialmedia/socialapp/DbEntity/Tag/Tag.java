@@ -1,5 +1,7 @@
 package com.socialmedia.socialapp.DbEntity.Tag;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.socialmedia.socialapp.DbEntity.Post.Post;
 import jakarta.persistence.*;
 
@@ -16,6 +18,7 @@ public class Tag {
     private String name;
 
     @ManyToMany(mappedBy = "tags")
+    @JsonBackReference
     private Set<Post> posts = new HashSet<>();
 
     public Tag() {

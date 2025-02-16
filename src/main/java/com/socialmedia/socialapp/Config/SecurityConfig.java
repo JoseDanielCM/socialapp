@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authRequest ->{
                     authRequest.requestMatchers("/auth/**").permitAll();
                     authRequest.requestMatchers("/api/user/**").authenticated(); // Requiere autenticación
+                    authRequest.requestMatchers("/api/posts/**").authenticated();
                     authRequest.anyRequest().authenticated();
                 })
                 .sessionManagement(sessionManager ->

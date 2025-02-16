@@ -48,7 +48,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
-
+        System.out.println("🔍 Request URL: " + request.getRequestURL());
+        System.out.println("🔍 JWT Token present: " + (token != null));
         filterChain.doFilter(request,response);
     }
     private String getTokenFromRequest(HttpServletRequest request){

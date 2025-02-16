@@ -57,7 +57,7 @@ public class AuthController {
                 .httpOnly(false)  // Evita acceso desde JavaScript
                 .secure(false)   // TRUE si usas HTTPS
                 .path("/")        // Disponible en toda la app
-                .maxAge(24 * 60 * 60) // Expira en 1 día
+                .maxAge(60 * 60) // Expira en 1 hora
                 .build();
 
         return ResponseEntity.ok()

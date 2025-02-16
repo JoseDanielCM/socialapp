@@ -24,7 +24,7 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference("user_post-posts")
+    @JsonBackReference("user-posts")
     private User user_post;
 
     private String title;
@@ -41,12 +41,13 @@ public class Post {
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
+    @JsonManagedReference
     private Set<Tag> tags = new HashSet<>();
 
 // RELACIONES
 
     // LIKE
-    @OneToMany(mappedBy = "post_like") // Follow -> user_data
+    @OneToMany(mappedBy = "postlike") // Follow -> user_data
     @JsonManagedReference("post_like-likes")
     private List<Like> likes;  // Users that this user is following
 

@@ -1,6 +1,8 @@
 package com.socialmedia.socialapp.DbEntity.User;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.socialmedia.socialapp.DbEntity.Comment.Comment;
 import com.socialmedia.socialapp.DbEntity.Like.Like;
 import com.socialmedia.socialapp.DbEntity.Notifications.Notification;
@@ -48,16 +50,16 @@ public class User implements UserDetails {
 // RELACIONES
 
 // FOLLOW
-@OneToMany(mappedBy = "user_follow") // Follow -> user_data
-@JsonManagedReference("user-follow")
-private List<Follow> follows;  // Usuarios que este usuario sigue
+    @OneToMany(mappedBy = "user_follow") // Follow -> user_data
+    @JsonManagedReference("user-follow")
+    private List<Follow> follows;  // Usuarios que este usuario sigue
 
     @OneToMany(mappedBy = "followed_user") // Follow -> followed_user
     @JsonManagedReference("user-followers")
     private List<Follow> followers; // Usuarios que siguen a este usuario
 // Post
     @OneToMany(mappedBy = "user_post") //
-    @JsonManagedReference("user_post-posts")
+    @JsonManagedReference("user-posts")
     private List<Post> posts; // posts of the user
 // Notification
     @OneToMany(mappedBy = "user_notification")
@@ -65,7 +67,7 @@ private List<Follow> follows;  // Usuarios que este usuario sigue
     private List<Notification> notifications; // notifications of the user
 
 // Like
-    @OneToMany(mappedBy = "user_like")
+    @OneToMany(mappedBy = "userlike")
     @JsonManagedReference("user_like-likes")
     private List<Like> likes;
 // Comment
@@ -285,10 +287,6 @@ private List<Follow> follows;  // Usuarios que este usuario sigue
                 ", profile_picture='" + profile_picture + '\'' +
                 ", registered_at=" + registered_at +
                 ", role=" + role +
-                ", posts=" + posts +
-                ", notifications=" + notifications +
-                ", likes=" + likes +
-                ", comments=" + comments +
                 '}';
     }
 }

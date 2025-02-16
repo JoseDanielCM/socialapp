@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.socialmedia.socialapp.DbEntity.Post.Post;
 import com.socialmedia.socialapp.DbEntity.User.User;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -26,6 +27,9 @@ public class Comment {
     private Post commented_post;
 
     private String content;
+
+    @CreationTimestamp
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
