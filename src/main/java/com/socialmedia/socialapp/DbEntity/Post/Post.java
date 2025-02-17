@@ -47,7 +47,7 @@ public class Post {
 // RELACIONES
 
     // LIKE
-    @OneToMany(mappedBy = "postlike") // Follow -> user_data
+    @OneToMany(mappedBy = "postlike", cascade = CascadeType.ALL, orphanRemoval = true) // Follow -> user_data
     @JsonManagedReference("post_like-likes")
     private List<Like> likes;  // Users that this user is following
 

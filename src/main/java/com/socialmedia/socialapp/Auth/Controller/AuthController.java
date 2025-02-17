@@ -50,6 +50,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
+        System.out.println(request);
         AuthResponse authResponse = authService.register(request); // Obtiene el token
         String token = authResponse.getToken(); // Asume que hay un `getToken()`
         System.out.println(token);

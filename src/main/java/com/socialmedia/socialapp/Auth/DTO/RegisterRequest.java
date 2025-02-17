@@ -71,4 +71,16 @@ public class RegisterRequest {
     public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
+
+    @Override
+    public String toString() {
+        return "RegisterRequest{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", birthdate=" + birthdate +
+                '}';
+    }
 }
