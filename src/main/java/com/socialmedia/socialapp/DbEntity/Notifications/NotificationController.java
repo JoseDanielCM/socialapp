@@ -16,8 +16,6 @@ public class NotificationController {
 
     @GetMapping("/getAll")
     public List<Notification> getNotifications() {
-        System.out.println("---------------------------------------");
-        System.out.println("---------------------------------------");
         return notificationRepository.findAll();
     }
 }
