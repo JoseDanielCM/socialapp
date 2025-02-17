@@ -1,6 +1,7 @@
 package com.socialmedia.socialapp.DbEntity.Like;
 
 
+import com.socialmedia.socialapp.DbEntity.Notifications.NotificationService;
 import com.socialmedia.socialapp.DbEntity.Post.Post;
 import com.socialmedia.socialapp.DbEntity.Post.PostRepository;
 import com.socialmedia.socialapp.DbEntity.User.User;
@@ -23,6 +24,9 @@ public class LikeService {
 
     @Autowired
     PostRepository postRepository;
+
+    @Autowired
+    NotificationService notificationService;
 
     public void deleteLike(Long idPost, Long userId) {
         Post post_like = postRepository.findById(idPost)
@@ -49,6 +53,12 @@ public class LikeService {
 
         like.setPostlike(post);
         like.setUserlike(user);
+
+        if (!post.getUser_post().getId().equals(user.getId())) {
+            notificationService.sendNotification("New like on your post: " + post.getTitle() + " by " + user.getUsername() + "!", post.getUser_post().getId()  );
+
+        }
+
         likeRepository.save(like);
     }
 

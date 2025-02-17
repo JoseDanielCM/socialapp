@@ -1,5 +1,6 @@
 package com.socialmedia.socialapp.DbEntity.Comment;
 
+import com.socialmedia.socialapp.DbEntity.Notifications.NotificationService;
 import com.socialmedia.socialapp.DbEntity.Post.Post;
 import com.socialmedia.socialapp.DbEntity.Post.PostRepository;
 import com.socialmedia.socialapp.DbEntity.User.User;
@@ -20,6 +21,9 @@ public class CommentService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    NotificationService notificationService;
+
     public User getUserByCommentId(Long id) {
         return commentRepository.getUserByCommentId(id);
     }
@@ -34,6 +38,14 @@ public class CommentService {
             comment.setCommented_post(post.get());
             comment.setContent(comment_text);
             System.out.println("valeee");
+
+
+
+            if (!post.get().getUser_post().getId().equals(user.get().getId())) {
+                notificationService.sendNotification( user.get().getUsername() + " commented on your post: " + comment_text + "!", post.get().getUser_post().getId()  );
+
+            }
+
             return commentRepository.save(comment);
         }
         System.out.println("no estan");

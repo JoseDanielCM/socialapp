@@ -6,6 +6,9 @@ import com.socialmedia.socialapp.DbEntity.User.User;
 import com.socialmedia.socialapp.DbEntity.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +21,18 @@ public class NotificationController {
     private NotificationRepository notificationRepository;
 
     @Autowired
+    NotificationService notificationService;
+
+    @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
+
+    @MessageMapping("/sendNotification")  // Mapea el destino del mensaje
+    public void sendNotification(Notification notification) {
+        messagingTemplate.convertAndSend("/topic/notifications", notification);  // Envia el mensaje a todos los suscriptores
+    }
 
     @GetMapping("/getAll")
     public List<Notification> getNotifications() {
@@ -30,6 +44,8 @@ public class NotificationController {
 
         System.out.println(request);
 
+        User commenter = userRepository.findById(request.getCommenter_id()).orElseThrow(() -> new RuntimeException("User not found"));
+
         List<User> mentionedUsers = userRepository.findByUsernameIn(request.getMentioned_users());
 
         for (User user : mentionedUsers) {
@@ -40,9 +56,16 @@ public class NotificationController {
                 notification.setReference_id(request.getComment_id()); // Enlace al comentario
                 notification.setUser_notification(user); // Usuario que recibe la notificación
 
+                if (! (request.getCommenter_id() == user.getId())) {
+                    notificationService.sendNotification( commenter.getUsername() + " mentioned you in a comment!",user.getId()  );
+
+                }
+
                 notificationRepository.save(notification);
             }
         }
         return ResponseEntity.ok("Notifications created");
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.socialmedia.socialapp.DbEntity.Follow;
 
+import com.socialmedia.socialapp.DbEntity.Notifications.NotificationService;
 import com.socialmedia.socialapp.DbEntity.User.User;
 import com.socialmedia.socialapp.DbEntity.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class FollowService {
 
     @Autowired
     FollowRepository followRepository;
+
+    @Autowired
+    NotificationService notificationService;
 
     public boolean userHaveFollowed(Long idOg,Long idView) {
 
@@ -51,5 +55,8 @@ public class FollowService {
         follow.setuser_follow(userOriginal);
         follow.setFollowed_user(userView);
         followRepository.save(follow);
+
+        notificationService.sendNotification( "New follow from " + userOriginal.getUsername() + " to " + userView.getUsername() + "!", userView.getId()  );
+
     }
 }
