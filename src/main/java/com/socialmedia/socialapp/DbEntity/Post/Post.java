@@ -52,7 +52,7 @@ public class Post {
     private List<Like> likes;  // Users that this user is following
 
     // COMMENT
-    @OneToMany(mappedBy = "commented_post") // Follow -> user_data
+    @OneToMany(mappedBy = "commented_post", cascade = CascadeType.ALL, orphanRemoval = true) // Follow -> user_data
     @JsonManagedReference("commented_post-comments")
     private List<Comment> comments;  // Users that this user is following
     public Post() {

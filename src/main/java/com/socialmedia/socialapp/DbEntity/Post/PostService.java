@@ -5,6 +5,7 @@ import com.socialmedia.socialapp.DbEntity.Post.DTO.CreatePostDTO;
 import com.socialmedia.socialapp.DbEntity.User.User;
 import com.socialmedia.socialapp.DbEntity.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -67,5 +68,10 @@ public class PostService {
 
     public Post save(Post post) {
         return postRepository.save(post);
+    }
+
+
+    public void delete(Long id) {
+        postRepository.deleteById(id);
     }
 }
