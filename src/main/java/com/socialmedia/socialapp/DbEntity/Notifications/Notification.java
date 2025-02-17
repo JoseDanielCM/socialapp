@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "notifications")
@@ -27,14 +28,16 @@ public class Notification {
     private Long reference_id;
 
     private Boolean is_read;
+
     @CreationTimestamp
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDate created_at;
+    @Column(updatable = false, nullable = false)
+    private LocalDateTime created_at;
+
 
     public Notification() {
     }
 
-    public Notification(Long id, User user_notification, NotificationType notification_type, Long reference_id, Boolean is_read, LocalDate created_at) {
+    public Notification(Long id, User user_notification, NotificationType notification_type, Long reference_id, Boolean is_read, LocalDateTime created_at) {
         this.id = id;
         this.user_notification = user_notification;
         this.notification_type = notification_type;
@@ -83,11 +86,11 @@ public class Notification {
         this.is_read = is_read;
     }
 
-    public LocalDate getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(LocalDate created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
