@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.socialmedia.socialapp.DbEntity.Post.Post;
 import com.socialmedia.socialapp.DbEntity.User.User;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "likes", uniqueConstraints = @UniqueConstraint(columnNames =  {"user_id","post_id"}))
@@ -27,12 +29,14 @@ public class Like {
     @JsonBackReference("user_like-likes")
     private User userlike;
 
-    private LocalDate created_at;
+    @CreationTimestamp
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime created_at;
 
     public Like() {
     }
 
-    public Like(Long id, Post postlike, User userlike, LocalDate created_at) {
+    public Like(Long id, Post postlike, User userlike, LocalDateTime created_at) {
         this.id = id;
         this.postlike = postlike;
         this.userlike = userlike;
@@ -63,11 +67,11 @@ public class Like {
         this.userlike = userlike;
     }
 
-    public LocalDate getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(LocalDate created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
