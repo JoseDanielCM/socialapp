@@ -30,7 +30,7 @@ public class Like {
     private User userlike;
 
     @CreationTimestamp
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(nullable = false)  // Solo si deseas que el campo sea obligatorio
     private LocalDateTime created_at;
 
     public Like() {
