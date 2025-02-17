@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.socialmedia.socialapp.DbEntity.Notifications.DTO.NotificationType;
 import com.socialmedia.socialapp.DbEntity.User.User;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 
@@ -20,12 +21,14 @@ public class Notification {
     @JsonBackReference("user_notification-notifications")
     private User user_notification;
 
-    private NotificationType notification_type;
+    @Enumerated(EnumType.STRING)
+    NotificationType notification_type;
 
     private Long reference_id;
 
     private Boolean is_read;
-
+    @CreationTimestamp
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDate created_at;
 
     public Notification() {

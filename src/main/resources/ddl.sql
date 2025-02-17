@@ -1,10 +1,12 @@
 INSERT INTO follows(user_id,followed_user_id) VALUES(1,2);
 INSERT INTO follows(user_id,followed_user_id) VALUES(4,2);
 
-INSERT INTO likes(user_id,post_id) VALUES(3 ,4);
+INSERT INTO likes(user_id,post_id) VALUES(3 ,1);
 INSERT into posts(content,title,user_id,created_at)
 VALUES ('contentOld','titleee',5,'2021-02-24 00:00:00');
 INSERT into comments(user_id,post_id,content) VALUES(2,1,'lloro 😢');
+
+insert into notifications(notification_type,is_read,reference_id,user_id) VALUES('COMMENT',false,1,2);
 SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));
 
 SELECT currval('users_id_seq');
