@@ -36,7 +36,11 @@ public class SecurityConfig {
                 }))
                 .csrf().disable()
                 .authorizeHttpRequests(authRequest ->{
-                    authRequest.requestMatchers("/auth/**").permitAll();
+                    authRequest.requestMatchers("/auth/**", "/*.yaml",
+                                    "/v3/api-docs/",
+                                    "/swagger-ui/",
+                                    "/swagger-ui.html")
+                            .permitAll();
                     authRequest.requestMatchers("/api/user/**").authenticated(); // Requiere autenticación
                     authRequest.requestMatchers("/api/posts/**").authenticated();
                     authRequest.anyRequest().authenticated();
