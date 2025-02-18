@@ -55,7 +55,7 @@ public class LikeService {
         like.setUserlike(user);
 
         if (!post.getUser_post().getId().equals(user.getId())) {
-            notificationService.sendNotification("New like on your post: " + post.getTitle() + " by " + user.getUsername() + "!", post.getUser_post().getId()  );
+            notificationService.sendNotification("New like on your post: " + post.getTitle() + " by " + user.getUsername() + "!", post.getUser_post().getId(), user  );
 
         }
 

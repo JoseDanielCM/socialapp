@@ -56,7 +56,7 @@ public class FollowService {
         follow.setFollowed_user(userView);
         followRepository.save(follow);
 
-        notificationService.sendNotification( "New follow from " + userOriginal.getUsername() + " to " + userView.getUsername() + "!", userView.getId()  );
+        notificationService.sendNotification( "New follow from " + userOriginal.getUsername() + " to " + userView.getUsername() + "!", userView.getId(), userOriginal  );
 
     }
 }

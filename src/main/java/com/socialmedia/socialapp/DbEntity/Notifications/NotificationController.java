@@ -57,7 +57,7 @@ public class NotificationController {
                 notification.setUser_notification(user); // Usuario que recibe la notificación
 
                 if (! (request.getCommenter_id() == user.getId())) {
-                    notificationService.sendNotification( commenter.getUsername() + " mentioned you in a comment!",user.getId()  );
+                    notificationService.sendNotification( commenter.getUsername() + " mentioned you in a comment!",user.getId(), commenter  );
 
                 }
 

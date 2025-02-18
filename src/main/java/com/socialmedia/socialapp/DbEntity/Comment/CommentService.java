@@ -42,7 +42,7 @@ public class CommentService {
 
 
             if (!post.get().getUser_post().getId().equals(user.get().getId())) {
-                notificationService.sendNotification( user.get().getUsername() + " commented on your post: " + comment_text + "!", post.get().getUser_post().getId()  );
+                notificationService.sendNotification( user.get().getUsername() + " commented on your post: " + comment_text + "!", post.get().getUser_post().getId(), user.get()  );
 
             }
 
