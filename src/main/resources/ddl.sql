@@ -88,6 +88,4 @@ AFTER INSERT ON comments
 FOR EACH ROW
 EXECUTE FUNCTION create_comment_notification();
 
-SELECT conname, condeferrable, convalidated, pg_get_constraintdef(oid) 
-FROM pg_constraint 
-WHERE conrelid = 'notifications'::regclass;
+

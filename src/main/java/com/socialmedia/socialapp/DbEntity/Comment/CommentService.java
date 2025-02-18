@@ -55,4 +55,8 @@ public class CommentService {
     public List<Comment> getByPost(Long postId) {
         return commentRepository.findByCommented_post(postRepository.findById(postId).orElse(null));
     }
+
+    public void deleteById(Long id) {
+        commentRepository.deleteById(id);
+    }
 }

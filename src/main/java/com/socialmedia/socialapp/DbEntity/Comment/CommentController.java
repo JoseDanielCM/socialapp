@@ -30,4 +30,10 @@ public class CommentController {
 
         return ResponseEntity.ok(commentService.postComment(post_id, user_id, comment_text)) ;
     }
+
+    @DeleteMapping("deleteComment/{id}")
+    public void deleteComment(@PathVariable Long id) {
+        commentService.deleteById(id);
+    }
+
 }
