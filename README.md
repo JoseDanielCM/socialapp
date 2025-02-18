@@ -1,4 +1,4 @@
-# Astralis - FrontEnd
+# Astralis - BackEnd
 
 ## 1️⃣ Descripción del Proyecto
 
@@ -34,14 +34,14 @@ El backend está desarrollado con **Spring Boot**, utilizando **PostgreSQL** com
 
 --- 
 
-![Imagen de Gestión de Usuarios](/public/LoginReadme.png)
+![Imagen de Gestión de Usuarios](/images/LoginReadme.png)
 ---
 **Contraseñas guardadas en la base de datos**
 
-![Imagen de Gestión de Usuarios](/public/PasswordsDB.png)
+![Imagen de Gestión de Usuarios](/images/PasswordsDB.png)
 
 **Edicion de perfil**
-![Imagen de Gestión de Usuarios](/public/EditProfile.png)
+![Imagen de Gestión de Usuarios](/images/EditProfile.png)
 
 
 
@@ -51,19 +51,19 @@ El backend está desarrollado con **Spring Boot**, utilizando **PostgreSQL** com
   - Imagen opcional (URL).
   - Tags personalizables (#Ejemplo).
 
-![Imagen de Gestión de Usuarios](/public/CreatePost.png)
+![Imagen de Gestión de Usuarios](/images/CreatePost.png)
 
 
 - Edición y eliminación de publicaciones por el autor.
 
-![Imagen de Gestión de Usuarios](/public/EditPost.png)
+![Imagen de Gestión de Usuarios](/images/EditPost.png)
 
 
 - Ordenamiento de publicaciones:
   - Cronológico.
   - Por relevancia (según interacciones).
 
-![Ejemplo de imagen](/public/HomePosts.png)
+![Ejemplo de imagen](/images/HomePosts.png)
 
 #### 3️⃣ Interacciones
 - Comentarios en publicaciones (máximo 200 caracteres).
@@ -73,18 +73,18 @@ El backend está desarrollado con **Spring Boot**, utilizando **PostgreSQL** com
   - Total de reacciones.
   - Total de comentarios.
 
-![Imagen de Interacciones](/public/Mentions.png)
+![Imagen de Interacciones](/images/Mentions.png)
 
 **Informacion de posts**
-![Imagen de Interacciones](/public/InformationPost.png)
+![Imagen de Interacciones](/images/InformationPost.png)
 
 #### 4️⃣ Seguimiento de Usuarios
 - Seguir/dejar de seguir a otros usuarios.
 - Sección de inicio con publicaciones de usuarios seguidos.
 - Listado de seguidores y seguidos.
 
-![Imagen de Seguimiento de Usuarios](/public/FollowUnfollow.png)
-![Imagen de Seguimiento de Usuarios](/public/Follows.png)
+![Imagen de Seguimiento de Usuarios](/images/FollowUnfollow.png)
+![Imagen de Seguimiento de Usuarios](/images/Follows.png)
 
 #### 5️⃣ Notificaciones
 - Se notificará cuando:
@@ -93,7 +93,7 @@ El backend está desarrollado con **Spring Boot**, utilizando **PostgreSQL** com
   - Se sea etiquetado en una publicación.
   - Se obtenga un nuevo seguidor.
 
-![Imagen de Notificaciones](/public/Notification.png)
+![Imagen de Notificaciones](/images/Notification.png)
 
 ---
 
@@ -255,7 +255,7 @@ Este repositorio incluirá:
 - Código fuente completo.
 - Documentación de la API con Swagger.
 - Diagrama de base de datos (Modelo Entidad-Relación).
-![Imagen de Notificaciones](/public/Notification.png)
+![Imagen de Notificaciones](/images/Notification.png)
 - Video demostrativo de la aplicación.
 🔗 [Enlace al video explicativo de la aplicacion](https://github.com/JoseDanielCM/front_social_media)
 ---
