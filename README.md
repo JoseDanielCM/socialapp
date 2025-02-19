@@ -282,7 +282,7 @@ Alternatively, you can create your own user using the registration option.
 
 ## 5️⃣ API Documentation
 To view the API documentation in PDF:
-- [Open API Documentation PDF](/public/ApiDocumentation.pdf)
+- [Open API Documentation PDF](/images/ApiDocumentation.pdf)
 
 
 ---
