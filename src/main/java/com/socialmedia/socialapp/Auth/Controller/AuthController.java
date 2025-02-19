@@ -44,10 +44,7 @@ public class AuthController {
                 .header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body(authResponse);
     }
-
-
-
-
+    
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
         System.out.println(request);
