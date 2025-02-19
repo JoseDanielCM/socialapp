@@ -292,9 +292,9 @@ This repository includes:
 - Complete source code.
 - API documentation with Swagger.
 - Database diagram (Entity-Relationship Model).
-![Notifications Image](/public/Notification.png)
+![Notifications Image](/images/DataBase.png)
 - Demonstration video of the application.
-🔗 [Application Demo Video](https://github.com/JoseDanielCM/front_social_media)
+🔗 [Application Demo Video](https://drive.google.com/drive/folders/1cWJ4MmkDo_sUpR_IyPlAG3hdH6vboo5F?usp=sharing)
 ---
 
 ## 7️⃣ Demonstration Video
